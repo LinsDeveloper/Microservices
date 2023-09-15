@@ -11,6 +11,9 @@ services:
   
   pgadmin:
     image: dpage/pgadmin4
+  
+  rabbitmq:
+    image: rabbitmq:3-management
 
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi

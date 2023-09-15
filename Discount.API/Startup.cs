@@ -32,7 +32,7 @@ namespace Discount.API
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Basket.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Discount.API", Version = "v1" });
             });
         }
 
@@ -46,7 +46,7 @@ namespace Discount.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Basket API V1");
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Discount API V1");
                 });
 
             }
