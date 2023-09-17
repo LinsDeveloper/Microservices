@@ -10,6 +10,8 @@ namespace Basket.API.Repositories
 
         Task<ShoppingCart> UpdateBasket(ShoppingCart basket);
 
+        Task<bool> FinalCheckout(BasketCheckout basket);
+
         Task DeleteBasket(string userName);
     }
 }

@@ -32,6 +32,13 @@ namespace Basket.API.Controllers
 
         }
 
+        [HttpPost]
+        public async Task<ActionResult<ShoppingCart>> FinalChekout([FromBody] ShoppingCart bascket)
+        {
+            return Ok(await _repository.UpdateBasket(bascket));
+
+        }
+
         [HttpDelete]
         public async Task<ActionResult> DeleteBasket(string userName)
         {

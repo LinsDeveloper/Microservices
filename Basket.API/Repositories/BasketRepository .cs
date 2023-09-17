@@ -1,6 +1,8 @@
 ﻿using Basket.API.Entities;
 using Basket.API.Repositories;
 using Microsoft.Extensions.Caching.Distributed;
+using RabbitMQ.Client;
+using System.Text;
 using System.Text.Json;
 
 namespace Basket.API.Repositories
@@ -9,6 +11,7 @@ namespace Basket.API.Repositories
     {
 
         private readonly IDistributedCache _redisCache;
+
 
         public BasketRepository(IDistributedCache redisCache)
         {
@@ -35,9 +38,55 @@ namespace Basket.API.Repositories
 
         public async Task<ShoppingCart> UpdateBasket(ShoppingCart basket)
         {
+
+            
             await _redisCache.SetStringAsync(basket.UserName, JsonSerializer.Serialize(basket));
 
             return await GetBasket(basket.UserName);
         }
+
+        public async Task<bool> FinalCheckout(BasketCheckout checkout)
+        {
+
+            try
+            {
+
+                var factory = new ConnectionFactory { HostName = "localhost" };
+                using var connection = factory.CreateConnection();
+                using var channel = connection.CreateModel();
+
+
+                channel.QueueDeclare(queue: "orderQueue",
+                     durable: false,
+                     exclusive: false,
+                     autoDelete: false,
+                     arguments: null);
+
+                string message = JsonSerializer.Serialize(checkout);
+                var body = Encoding.UTF8.GetBytes(message);
+
+                channel.BasicPublish(exchange: "",
+                                     routingKey: "orderQueue",
+                                     basicProperties: null,
+                                     body: body);
+
+                Console.WriteLine($" [x] Sent {message}");
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao tentar publicar na fila", ex);
+
+            }
+
+
+             await _redisCache.RemoveAsync(checkout.UserName);
+
+             return true;
+
+
+        }
+
     }
 }

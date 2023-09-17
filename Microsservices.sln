@@ -9,9 +9,11 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.API", "Basket.API\Basket.API.csproj", "{9DE05206-603B-4468-9F73-0928F616D758}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Discount.API", "Discount.API\Discount.API.csproj", "{F3299FF9-B11E-4584-8F22-6ECB700DC841}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Discount.API", "Discount.API\Discount.API.csproj", "{F3299FF9-B11E-4584-8F22-6ECB700DC841}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Discount.Grpc", "Discount.Grpc\Discount.Grpc.csproj", "{AE5D610B-8961-4D62-9165-8C5F8DB44F68}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderPublisherRMQ", "OrderPublisherRMQ\OrderPublisherRMQ.csproj", "{F73CCDFC-A1CC-4510-B804-DDB1AA517881}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderConsumerRMQ", "OrderConsumerRMQ\OrderConsumerRMQ.csproj", "{9247EB3C-EFC7-411B-95B1-205F1D22A540}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +37,14 @@ Global
 		{F3299FF9-B11E-4584-8F22-6ECB700DC841}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3299FF9-B11E-4584-8F22-6ECB700DC841}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3299FF9-B11E-4584-8F22-6ECB700DC841}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AE5D610B-8961-4D62-9165-8C5F8DB44F68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE5D610B-8961-4D62-9165-8C5F8DB44F68}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE5D610B-8961-4D62-9165-8C5F8DB44F68}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE5D610B-8961-4D62-9165-8C5F8DB44F68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F73CCDFC-A1CC-4510-B804-DDB1AA517881}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F73CCDFC-A1CC-4510-B804-DDB1AA517881}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F73CCDFC-A1CC-4510-B804-DDB1AA517881}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F73CCDFC-A1CC-4510-B804-DDB1AA517881}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9247EB3C-EFC7-411B-95B1-205F1D22A540}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9247EB3C-EFC7-411B-95B1-205F1D22A540}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9247EB3C-EFC7-411B-95B1-205F1D22A540}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9247EB3C-EFC7-411B-95B1-205F1D22A540}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
