@@ -2,6 +2,8 @@
 using Basket.API.Repositories;
 using Microsoft.Extensions.Caching.Distributed;
 using RabbitMQ.Client;
+using System.Net.Mail;
+using System.Reflection.Emit;
 using System.Text;
 using System.Text.Json;
 
@@ -45,7 +47,7 @@ namespace Basket.API.Repositories
             return await GetBasket(basket.UserName);
         }
 
-        public async Task<bool> FinalCheckout(BasketCheckout checkout)
+        public async Task<BasketCheckout> FinalCheckout(BasketCheckout checkout)
         {
 
             try
@@ -81,9 +83,24 @@ namespace Basket.API.Repositories
             }
 
 
-             await _redisCache.RemoveAsync(checkout.UserName);
+            await _redisCache.RemoveAsync(checkout.UserName);
 
-             return true;
+            return new BasketCheckout (checkout) { 
+                UserName = checkout.UserName, 
+                TotalPrice = checkout.TotalPrice, 
+                FirstName = checkout.FirstName,
+                LastName = checkout.LastName,
+                EmailAddress = checkout.EmailAddress,
+                AddressLine = checkout.AddressLine,
+                Country = checkout.Country,
+                State = checkout.State,
+                ZipCode = checkout.ZipCode,
+                CardName = checkout.CardName,
+                CardNumber = checkout.CardNumber,
+                Expiration = checkout.Expiration,
+                CVV = checkout.CVV,
+                PaymentMethod = checkout.PaymentMethod
+            };
 
 
         }

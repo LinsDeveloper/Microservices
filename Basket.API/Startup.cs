@@ -23,7 +23,6 @@ namespace Basket.API
         public void ConfigureServices(IServiceCollection services)
         {
             // Aqui você pode adicionar suas dependências
-
             services.AddStackExchangeRedisCache(options =>
             {
                 options.Configuration = Configuration.GetValue<string>("CacheSettings:ConnectionString");
@@ -31,6 +30,8 @@ namespace Basket.API
             });
 
             services.AddScoped<IBasketRepository, BasketRepository>();
+
+            services.AddControllers();
 
             services.AddControllers();
 

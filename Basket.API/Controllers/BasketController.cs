@@ -32,12 +32,14 @@ namespace Basket.API.Controllers
 
         }
 
-        [HttpPost]
-        public async Task<ActionResult<ShoppingCart>> FinalChekout([FromBody] ShoppingCart bascket)
-        {
-            return Ok(await _repository.UpdateBasket(bascket));
+        //[HttpPost]
+        //public async Task<ActionResult<BasketCheckout>> FinalCheckout([FromBody] BasketCheckout checkout)
+        //{
 
-        }
+        //    var checkount = await _repository.FinalCheckout(checkout);
+        //    return Ok(checkount ?? new BasketCheckout(checkout));
+
+        //}
 
         [HttpDelete]
         public async Task<ActionResult> DeleteBasket(string userName)

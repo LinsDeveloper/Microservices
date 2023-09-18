@@ -1,6 +1,8 @@
 version: '3.4'
 
 services:
+  
+
   basketdb:
     image: redis:alpine
   catalogdb:
@@ -15,6 +17,8 @@ services:
   rabbitmq:
     image: rabbitmq:3-management
 
+  
+    
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:
@@ -32,6 +36,14 @@ services:
     build:
       context: .
       dockerfile: Discount.API/Dockerfile
+
+  datadog-agent:
+    image: datadog/agent
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DD_SITE=datadoghq.eu
+      - DD_API_KEY=60c2281f62d02fb0013e06e719d100dc
 
 volumes:
   mongo_data:

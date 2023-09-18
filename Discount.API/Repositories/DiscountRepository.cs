@@ -24,7 +24,7 @@ namespace Discount.API.Repositories
 
             NpgsqlConnection connection = GetConnectionPostgreSQL();
 
-            var effected = await connection.ExecuteAsync("INSERT INTO Coupon (ProductName, Description, Amount) VALUES (@ProductName, @Description, @Amount",
+            var effected = await connection.ExecuteAsync("INSERT INTO Coupon (ProductName, Description, Amount) VALUES (@ProductName, @Description, @Amount)",
                 new { ProductName = coupon.ProductName, Description = coupon.Description, Amount = coupon.Amount });
 
             if (effected == 0)
@@ -73,21 +73,23 @@ namespace Discount.API.Repositories
 
 
             var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += (model, ea) =>
+            consumer.Received += async (model, ea) =>
             {
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
                 var order = System.Text.Json.JsonSerializer.Deserialize<BascketChekount>(message);
+
+                Coupon newCoupon = new Coupon { ProductName = order?.UserName, Amount = 10, Description = "Desconto pela compra" };
+                if(order != null)
+                {
+                    await CreateDiscount(newCoupon);
+                }
+                
+
             };
             channel.BasicConsume(queue: "orderQueue",
                                  autoAck: true,
                                  consumer: consumer);
-
-
-
-            string nomeProduct = order;
-
-            await CreateDiscount(coupon);
 
 
 
